@@ -5,7 +5,7 @@ const elements = {};
 
 // FUNCTIONS
 const domMapping = () => {
-    elements.main = dom.$('main');
+    elements.main = dom123.$('main');
     console.log('domMapping', elements.main)
 }
 
@@ -13,7 +13,7 @@ const render = contents => {
 
     for (const content of contents) {
         console.log(content);
-        const container = dom.create(
+        const container = dom123.create(
             false,
             'div',
             elements.main,
@@ -21,14 +21,14 @@ const render = contents => {
         )
 
         // Input1
-        dom.create(
+        dom123.create(
             content.input1,
             'h3',
             container
         )
 
         // Input2
-        dom.create(
+        dom123.create(
             content.input2,
             'p',
             container
@@ -36,7 +36,7 @@ const render = contents => {
 
         // Input3
         if (content.input3) {
-            dom.create(
+            dom123.create(
                 content.input3,
                 'p',
                 container,
@@ -44,10 +44,12 @@ const render = contents => {
             )
         }
     }
+    console.log('rendered')
 }
 
 const loadContents = () => {
     let contents = localStorage.getItem('contents');
+    console.log('Contents to be loaded')
     return contents ? JSON.parse(contents) : [];
 }
 
@@ -58,4 +60,5 @@ const init = () => {
 
 // INIT
 // document.addEventListener('DOMContentLoaded', init);
+// if defer is used to reference this index.js in HTML, init() is fine
 init();

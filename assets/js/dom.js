@@ -1,6 +1,6 @@
 'use strict';
-
-const dom = {
+// 
+const dom123 = {
     create(content, type, parent, classes) {
         const newEl = document.createElement(type);
         if (content) newEl.innerHTML = content;
