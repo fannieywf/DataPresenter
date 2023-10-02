@@ -12,7 +12,13 @@ const domMapping = () => {
 const render = contents => {
 
     for (const content of contents) {
-        console.log(content);
+        console.log('content: ', content);
+        // Object.keys() is built-in
+        console.log('length of each content: ', Object.keys(content).length)
+        console.log('content keys: ', Object.keys(content))
+        console.log('content values: ', Object.values(content))
+        
+        // content, type, parent, classes
         const container = dom123.create(
             false,
             'div',
@@ -47,15 +53,45 @@ const render = contents => {
     console.log('rendered')
 }
 
+// TODO: Multivariate
+const logisticTransform = x => {
+    return 1 / (1 + Math.exp(-x));
+}
+
 const loadContents = () => {
     let contents = localStorage.getItem('contents');
+    console.log('contents from localStorage getItem: ', contents)
     console.log('Contents to be loaded')
+
     return contents ? JSON.parse(contents) : [];
+}
+
+const transformContents = contents => {
+    // copy object
+    // shallow copy: spread(...) & Object.assign()
+    // let tfcontents = Object.assign({}, contents);
+    // let tfcontents = {...contents}
+    // deepcopy: JSON methods
+    let tfcontents = JSON.parse(JSON.stringify(contents))
+    console.log('tfcontents: ', tfcontents)
+
+    for (const tfcontent of tfcontents) {
+        // console.log('tfcontent: ', tfcontent);
+        // console.log('length of each tfcontent: ', Object.keys(tfcontent).length)
+        // console.log('tfcontent keys: ', Object.keys(tfcontent))
+        // console.log('tfcontent values: ', Object.values(tfcontent))
+        for (let c = 0; c < Object.keys(tfcontent).length; c++) {
+            tfcontent[Object.keys(tfcontent)[c]] = logisticTransform(Number(Object.values(tfcontent)[c]))
+            // console.log(Object.keys(tfcontent)[c], Object.values(tfcontent)[c])
+        }
+    }
+    return tfcontents
 }
 
 const init = () => {
     domMapping();
-    render(loadContents());
+    // render(loadContents());
+    render(transformContents(loadContents()));
 }
 
 // INIT
