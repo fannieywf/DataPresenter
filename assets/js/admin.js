@@ -83,6 +83,8 @@ const appendEventlisteners = () => {
     console.log('Eventlisteners appended')
 }
 
+
+
 const init = () => {
     // 00: initialise at the beginning
     domMapping();

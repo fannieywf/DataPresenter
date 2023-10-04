@@ -2,58 +2,51 @@
 
 // CONSTANTS / VARIABLES
 const elements = {};
+const avgs = {};
 
 // FUNCTIONS
 const domMapping = () => {
-    elements.main = dom123.$('main');
-    console.log('domMapping', elements.main)
+    elements.table = dom123.$('table');
+    console.log('domMapping table: ', elements.table)
+}
+
+const createRow = (parent, dataset) => {
+    console.log(dataset)
+    const container = dom123.create(
+        false,
+        'tr',
+        parent,
+        'container'
+    )
+        for (let value of dataset) {
+            dom123.create(
+                value,
+                'td',
+                container
+            )        
+        } 
+
 }
 
 const render = contents => {
 
+    createRow(elements.table, Object.keys(contents[0]))
+
     for (const content of contents) {
-        console.log('content: ', content);
-        // Object.keys() is built-in
-        console.log('length of each content: ', Object.keys(content).length)
-        console.log('content keys: ', Object.keys(content))
-        console.log('content values: ', Object.values(content))
-        
+        // console.log('content: ', content);
+        // // Object.keys() is built-in
+        // console.log('length of each content: ', Object.keys(content).length)
+        // console.log('content keys: ', Object.keys(content))
+        // console.log('content values: ', Object.values(content))
+        createRow(elements.table, Object.values(content))
+    
         // content, type, parent, classes
-        const container = dom123.create(
-            false,
-            'div',
-            elements.main,
-            'container'
-        )
-
-        // Input1
-        dom123.create(
-            content.input1,
-            'h3',
-            container
-        )
-
-        // Input2
-        dom123.create(
-            content.input2,
-            'p',
-            container
-        )
-
-        // Input3
-        if (content.input3) {
-            dom123.create(
-                content.input3,
-                'p',
-                container,
-                'info'
-            )
-        }
     }
+    // Output
+    createRow(elements.table, Object.values(avgs))
     console.log('rendered')
 }
 
-// TODO: Multivariate
 const logisticTransform = x => {
     return 1 / (1 + Math.exp(-x));
 }
@@ -64,6 +57,37 @@ const loadContents = () => {
     console.log('Contents to be loaded')
 
     return contents ? JSON.parse(contents) : [];
+}
+
+const calculateStatistics = contents => {
+    let parses = JSON.parse(JSON.stringify(contents))
+    // console.log("parsed contents: ", parses)
+    // console.log("length of parsed contents: ", parses.length)
+
+    // 2 parses
+    // console.log(parse)
+    // console.log("parsed keys", Object.keys(parse))
+    // console.log("parsed values", Object.values(parse))
+    // 3 is
+    // for (let i = 0; i < Object.keys(parse).length; i++) {
+    // console.log(Object.keys(parse)[i])
+    //     console.log(Number(Object.values(parse)[i]))
+    //avg[Object.keys(parses[parse])[i]] += Number(Object.values(parses[parse])[i])
+    for (const key in parses[0]) {
+        let avg = 0
+        for (const parse of parses) {
+            avg += Number(parse[key])
+        }
+        avg /= parses.length
+        console.log("avg: ", avg)
+        avgs[key] = avg
+    }
+    console.log(avgs)
+    console.log(avgs['input3'])
+
+    let avgsalary = avgs['input3'];
+    document.getElementById("avgsalary").innerHTML = avgsalary;
+    return contents
 }
 
 const transformContents = contents => {
@@ -91,7 +115,8 @@ const transformContents = contents => {
 const init = () => {
     domMapping();
     // render(loadContents());
-    render(transformContents(loadContents()));
+    render(calculateStatistics(loadContents()));
+    // render(transformContents(loadContents()));
 }
 
 // INIT
