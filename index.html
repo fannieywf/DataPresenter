@@ -13,9 +13,10 @@
 <body>
     <h1>Welcome!</h1>
     <p>Our goal is to: <q>Provide a summary to you.</q></p>
-    <a href="#addr">Jump to Address</a>
+    <a href="#dgr">Jump to Data Generation Process</a>
 
-    <h2>HTML Table</h2>
+    <h2>Summary</h2>
+    <!-- table content is generated from domMapping -->
     <table>
         <tr></tr>
     </table>
@@ -23,16 +24,18 @@
     <!-- do NOT forget the main tags
     <main style="border:2px solid black"></main>
     -->
-    <p>The average salary is: 
+    <p>Thank you for your input. 
+        <br>According to all the data entries, the average salary is: 
         <span id="avgsalary"></span>
-    </p>>
+    </p>
+    <p id="dgr">To understand the data generation process, please visit our 
+        <a href="/admin.html">Admin</a>
+    </p>
     
-    <a href="/admin.html">Visit our Admin</a>
-
     <address id="addr">
-        Written by Fannie Yuen<br> 
-        Visit us at:<br>
-        https://www.github.com/fannieywf<br>
+        Written by Fannie Yuen and supported by Christian Heisch<br> 
+        Visit us at:
+        <a href="https://github.com/fannieywf/DataPresenter">Github</a>
         </address>
 </body>
 

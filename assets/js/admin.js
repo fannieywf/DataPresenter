@@ -21,6 +21,21 @@ const dom12 = {
     },
 }
 
+const validate = () => {
+    let isok = true;
+    for (let i = 0; i < document.getElementById("formNewContent").elements.length - 1; i++) {
+        let input = document.getElementById("formNewContent").elements[i]
+        input.classList.remove("err") 
+        if (input.value == "") {
+            input.classList.add("err") 
+            console.log("Empty field in: ", i, "th role")
+            alert(("Please fill out the empty field"));
+            isok = false;
+        }
+    }
+    return isok;
+}
+
 const domMapping = () => {
     // form is self created
     // '#formNewContent': CSS syntax
@@ -35,17 +50,17 @@ const appendContent = content => {
         console.log('localStoragekeys', (localStorage.key(i)));
         console.log('localStoragevalues', localStorage.getItem(localStorage.key(i)));
     }
-    
+
     // 3:
     let loadedContents = localStorage.getItem('contents');
     console.log('loadedContents from localStorage getItem', loadedContents)
-    
+
     // Q: Are contents exactly the parsed loadedContents? 
     let contents = loadedContents ? JSON.parse(loadedContents) : [];
     // 4: Darstellungsfehler von der Console
     console.log('contents as json parsed loaded contents', contents)
     // ...: Kopie von Objekte
-    console.log('contents as json parsed loaded contents...', {...contents})
+    console.log('contents as json parsed loaded contents...', { ...contents })
 
     // 5: After data from Entries
     contents.push(content);
@@ -59,21 +74,26 @@ const appendContent = content => {
 const handleEnter = evt => {
     evt.preventDefault();
 
-    // 1: After Enter
-    let data = new FormData(elements.form);
-    console.log('new FormData', data)
+    console.log("elements form after Enter: ", elements.form)
 
-    // 2: After new FormData
-    data = Object.fromEntries(data);
-    console.log('data from Entries', data)
+    if (validate()) {
 
-    // 
-    appendContent(data);
-    console.log('appendContent finished')
+        // 1: After Enter
+        let data = new FormData(elements.form);
+        console.log('new FormData', data)
 
-    // 7: After data append to Content
-    elements.form.reset();
-    console.log('form from elements reset', elements.form)
+        // 2: After new FormData
+        data = Object.fromEntries(data);
+        console.log('data from Entries', data)
+
+        // 
+        appendContent(data);
+        console.log('appendContent finished')
+
+        // 7: After data append to Content
+        elements.form.reset();
+        console.log('form from elements reset', elements.form)
+    }
 }
 
 const appendEventlisteners = () => {
@@ -82,8 +102,6 @@ const appendEventlisteners = () => {
     elements.form.addEventListener('submit', handleEnter);
     console.log('Eventlisteners appended')
 }
-
-
 
 const init = () => {
     // 00: initialise at the beginning
