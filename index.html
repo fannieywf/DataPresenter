@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link rel="stylesheet" href="./assets/css/styles.css" />
 
@@ -11,8 +12,9 @@
 </head>
 
 <body>
-    <h1>Welcome!</h1>
-    <p>Our goal is to: <q>Provide a summary to you.</q></p>
+    <h1 style="text-align:center">Welcome!</h1>
+    <p>Corporation XYZ would like to give you a summary.</p>
+    <hr>
     <a href="#dgr">Jump to Data Generation Process</a>
 
     <h2>Summary</h2>
@@ -21,14 +23,17 @@
         <tr></tr>
     </table>
 
-    <!-- do NOT forget the main tags
-    <main style="border:2px solid black"></main>
-    -->
-    <p>Thank you for your input. 
-        <br>According to all the data entries, the average salary is: 
-        <span id="avgsalary"></span>
+    <p>According to all the data entries, the overall average salary is: 
+        <b><span id="avgsalary"></span></b>
     </p>
-    <p id="dgr">To understand the data generation process, please visit our 
+
+    <p>Please note that the current average salary is based on input from 
+        <b><span id="numusers"></span></b>
+         user(s).
+    </p>
+
+
+    <p id="dgr">Please find the data generation process by visiting our 
         <a href="/admin.html">Admin</a>
     </p>
     

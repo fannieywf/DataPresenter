@@ -28,7 +28,7 @@ const validate = () => {
         input.classList.remove("err") 
         if (input.value == "") {
             input.classList.add("err") 
-            console.log("Empty field in: ", i, "th role")
+            console.log("Empty field in: ", i, "th row")
             alert(("Please fill out the empty field"));
             isok = false;
         }
@@ -38,23 +38,20 @@ const validate = () => {
 
 const domMapping = () => {
     // form is self created
-    // '#formNewContent': CSS syntax
-    elements.form = dom123.$('#formNewContent');
+    elements.form = dom123.$('#formNewContent'); // '#formNewContent': CSS syntax
     // elements.form = dom12.$();
     console.log('domMapping', elements.form)
 }
 
 const appendContent = content => {
-    // Q: where to get the keyname 'contents'? From Storage?
     for (let i = 0; i < localStorage.length; i++) {
-        console.log('localStoragekeys', (localStorage.key(i)));
-        console.log('localStoragevalues', localStorage.getItem(localStorage.key(i)));
+        console.log('localStoragekeys', (localStorage.key(i))); // keys of localStorage
+        console.log('localStoragevalues', localStorage.getItem(localStorage.key(i))); // values of localStorage
     }
 
     // 3:
     let loadedContents = localStorage.getItem('contents');
     console.log('loadedContents from localStorage getItem', loadedContents)
-
     // Q: Are contents exactly the parsed loadedContents? 
     let contents = loadedContents ? JSON.parse(loadedContents) : [];
     // 4: Darstellungsfehler von der Console
@@ -86,7 +83,6 @@ const handleEnter = evt => {
         data = Object.fromEntries(data);
         console.log('data from Entries', data)
 
-        // 
         appendContent(data);
         console.log('appendContent finished')
 
@@ -98,8 +94,7 @@ const handleEnter = evt => {
 
 const appendEventlisteners = () => {
     // 0: Upon button clicked
-    // 'submit' as string HTMLFormElement event type
-    elements.form.addEventListener('submit', handleEnter);
+    elements.form.addEventListener('submit', handleEnter); // 'submit' as string HTMLFormElement event type
     console.log('Eventlisteners appended')
 }
 

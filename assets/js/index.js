@@ -10,7 +10,7 @@ const domMapping = () => {
     console.log('domMapping table: ', elements.table)
 }
 
-const createRow = (parent, dataset) => {
+const createRow = (parent, dataset, headlinecol, tabletype) => {
     console.log(dataset)
     const container = dom123.create(
         false,
@@ -18,10 +18,11 @@ const createRow = (parent, dataset) => {
         parent,
         'container'
     )
+        dom123.create(headlinecol, 'th', container)
         for (let value of dataset) {
             dom123.create(
                 value,
-                'td',
+                tabletype,
                 container
             )        
         } 
@@ -29,14 +30,14 @@ const createRow = (parent, dataset) => {
 
 const render = contents => {
     // Headline from keys
-    createRow(elements.table, Object.keys(contents[0]))
+    createRow(elements.table, Object.keys(contents[0]), 'attributes', 'th')
     
     // Input
     for (const content of contents) {
-        createRow(elements.table, Object.values(content))
+        createRow(elements.table, Object.values(content), 'User', 'td')
     }
     // Statistics
-    createRow(elements.table, Object.values(avgs))
+    createRow(elements.table, Object.values(avgs), 'Average', 'th')
     console.log('rendered')
 }
 
@@ -57,19 +58,19 @@ const calculateStatistics = contents => {
         }
         avg /= parses.length
         console.log("avg: ", avg)
-        avgs[key] = avg
+        avgs[key] = avg.toPrecision(5)
     }
     console.log(avgs)
     console.log(avgs['salary'])
 
     let avgsalary = avgs['salary'];
     document.getElementById("avgsalary").innerHTML = avgsalary;
+    document.getElementById("numusers").innerHTML = parses.length;
     return contents
 }
 
 const init = () => {
     domMapping();
-    // render(loadContents());
     render(calculateStatistics(loadContents()));
 }
 
