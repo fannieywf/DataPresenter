@@ -1,11 +1,15 @@
 # DataPresenter
 
-In diesem Projekt geht es darum, dass ein Nutzer anhand von seinen eigenen und anderen Eingaben einen Überblick hat, wie die Länge der Ausbildung, die Dauer der Anstellung und das Gehalt im Durchschnitt bei seinem Arbeitgeber aussehen. 
+Nutzer kann anhand eigener und anderer Eingaben einen Überblick bekommen, wie seine Attribute im Vergleich zu Eingaben von anderen aussehen. 
 
-Auf der Adminseite gibt der Nutzer seine Angaben ein. Die Felder werden geprüft, ob sie vollständig ausgefüllt sind.  
+Die Adminseite dient als das Backend für die Datenverarbeitung. 
 
-Nach dem Enter werden die eingegeben Daten in Local Storage gespeichert. 
+Nutzer gibt seine Eingaben in die Felder ein. Nach den Eingaben werden Daten validiert, bis alle Felder vollständig ausgefüllt werden. Die Angaben aus dem HTML-Formular werden durch das Dokumenten-Objekt-Modell (DOM) als Data-Objekt gespeichert. Jedes Data-Objekt wird in den bestehenden Daten aus Local Storage hinzugeführt. Daten werden wieder in Local Storage gespeichert. 
 
-Diese Daten werden nochmal aus Local Storage geladen. 
+Die Indexseite dient als das Frontend für die Datendarstellung. 
 
-Durch die Zeilenerstellung mHv DOM und die Renderfunktion wird eine Zusammenfassung auf der Indexseite dargestellt. 
+Nach den Nutzereingaben auf der Adminseite werden die gesamten Informationen von allen Nutzern in einer Tabelle dargestellt. 
+
+Attribute, Nutzereingaben und Statistik werden als neue Zeilen in die Tabelle hinzugefügt. 
+
+Zusätzliche Informationen werden als Bericht gegeben. 

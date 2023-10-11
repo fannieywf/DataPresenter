@@ -7,11 +7,9 @@ const avgs = {};
 // FUNCTIONS
 const domMapping = () => {
     elements.table = dom123.$('table');
-    console.log('domMapping table: ', elements.table)
 }
 
 const createRow = (parent, dataset, headlinecol, tabletype) => {
-    console.log(dataset)
     const container = dom123.create(
         false,
         'tr',
@@ -43,9 +41,6 @@ const render = contents => {
 
 const loadContents = () => {
     let contents = localStorage.getItem('contents');
-    console.log('contents from localStorage getItem: ', contents)
-    console.log('Contents to be loaded')
-
     return contents ? JSON.parse(contents) : [];
 }
 
@@ -60,8 +55,6 @@ const calculateStatistics = contents => {
         console.log("avg: ", avg)
         avgs[key] = avg.toPrecision(5)
     }
-    console.log(avgs)
-    console.log(avgs['salary'])
 
     let avgsalary = avgs['salary'];
     document.getElementById("avgsalary").innerHTML = avgsalary;
